@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "507550665212",
+    "project_id": "budget-app-database-275f5",
+    "storage_bucket": "budget-app-database-275f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507550665212:android:3216b5d4fc97d391654a79",
+        "android_client_info": {
+          "package_name": "com.example.budget_app_prototype"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5eqouP30PE8C68Agkl6pLSr7518smhwk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507550665212:android:2db66bfc375c54a1654a79",
+        "android_client_info": {
+          "package_name": "com.example.budgetink"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5eqouP30PE8C68Agkl6pLSr7518smhwk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

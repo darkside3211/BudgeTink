@@ -4,7 +4,7 @@ class RecordsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue,
+      backgroundColor: Color.fromARGB(255, 96, 62, 219),
       body: Center(
         child: Text(
           'Records',

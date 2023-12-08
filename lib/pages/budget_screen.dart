@@ -4,7 +4,7 @@ class BudgetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue,
+      backgroundColor: Color.fromARGB(255, 204, 22, 189),
       body: Center(
         child: Text(
           'Budget',

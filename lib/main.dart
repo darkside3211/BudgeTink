@@ -54,8 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final _pageOptions = [
     HomePage(),
     AnalyticsScreen(),
-    RecordsScreen(),
     BudgetScreen(),
+    RecordsScreen(),
   ];
 
   void _incrementCounter() {
@@ -159,8 +159,8 @@ class _MyHomePageState extends State<MyHomePage> {
         items: <Widget>[
           Icon(Icons.home, size: 30),
           Icon(Icons.add_chart, size: 30),
-          Icon(Icons.format_list_bulleted, size: 30),
           Icon(Icons.money, size: 30),
+          Icon(Icons.format_list_bulleted, size: 30),
         ],
         color: Colors.white,
         buttonBackgroundColor: Colors.white,

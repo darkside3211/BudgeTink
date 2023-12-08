@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:animations/animations.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -15,55 +16,69 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Add your navigation code here
+                  child: OpenContainer(
+                    closedBuilder:
+                        (BuildContext context, VoidCallback openContainer) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                            50), // Adjust the value as needed
+                        child: Container(
+                          height: 50,
+                          color: Colors.green,
+                        ),
+                      );
                     },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(
-                          50), // Adjust the value as needed
-                      child: Container(
-                        height: 50,
-                        color: Colors.green,
-                      ),
-                    ),
+                    openBuilder: (BuildContext context, VoidCallback _) {
+                      // Return the destination widget here
+                      // For example, a simple Text widget
+                      return Center(child: Text('Destination Widget'));
+                    },
                   ),
                 ),
-                Gap(16), // Add a Gap widget here
+                Gap(16),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Add your navigation code here
+                  child: OpenContainer(
+                    closedBuilder:
+                        (BuildContext context, VoidCallback openContainer) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                            50), // Adjust the value as needed
+                        child: Container(
+                          height: 50,
+                          color: Colors.green,
+                        ),
+                      );
                     },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(
-                          50), // Adjust the value as needed
-                      child: Container(
-                        height: 50,
-                        color: Colors.green,
-                      ),
-                    ),
+                    openBuilder: (BuildContext context, VoidCallback _) {
+                      // Return the destination widget here
+                      // For example, a simple Text widget
+                      return Center(child: Text('Destination Widget'));
+                    },
                   ),
                 ),
                 Gap(16), // Add another Gap widget here
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Add your navigation code here
+                  child: OpenContainer(
+                    closedBuilder:
+                        (BuildContext context, VoidCallback openContainer) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                            50), // Adjust the value as needed
+                        child: Container(
+                          height: 50,
+                          color: Colors.green,
+                        ),
+                      );
                     },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(
-                          50), // Adjust the value as needed
-                      child: Container(
-                        height: 50,
-                        color: Colors.green,
-                      ),
-                    ),
+                    openBuilder: (BuildContext context, VoidCallback _) {
+                      // Return the destination widget here
+                      // For example, a simple Text widget
+                      return Center(child: Text('Destination Widget'));
+                    },
                   ),
                 ),
               ],
             ),
-            // Rest of your page here
           ],
         ),
       ),

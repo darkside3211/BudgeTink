@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'register_user.dart';
 import 'package:gap/gap.dart';
+import 'package:animations/animations.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -33,7 +34,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Gap(20),
+              const Gap(20),
               TextField(
                 controller: passwordController,
                 decoration: InputDecoration(
@@ -52,11 +53,20 @@ class LoginScreen extends StatelessWidget {
                       email: emailController.text,
                       password: passwordController.text,
                     );
+                    // Use PageRouteBuilder for custom transition
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const MyHomePage(
-                              title: 'Flutter Demo Home Page')),
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            const MyHomePage(title: 'Flutter Demo Home Page'),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          return FadeTransition(
+                            opacity: animation,
+                            child: child,
+                          );
+                        },
+                      ),
                     );
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
@@ -80,8 +90,17 @@ class LoginScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const RegisterPage()),
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const RegisterPage(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        );
+                      },
+                    ),
                   );
                 },
               ),

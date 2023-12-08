@@ -1,123 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => false, // Disable back button
       child: Scaffold(
-        body: ListView(
+        body: Column(
           children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ExpandedContainer(color: Colors.red)));
-              },
-              child: Container(
-                height: 200,
-                color: Colors.red,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      // Add your navigation code here
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                          50), // Adjust the value as needed
+                      child: Container(
+                        height: 50,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ),
+                ),
+                Gap(16), // Add a Gap widget here
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      // Add your navigation code here
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                          50), // Adjust the value as needed
+                      child: Container(
+                        height: 50,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ),
+                ),
+                Gap(16), // Add another Gap widget here
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      // Add your navigation code here
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                          50), // Adjust the value as needed
+                      child: Container(
+                        height: 50,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ExpandedContainer(color: Colors.green)));
-              },
-              child: Container(
-                height: 200,
-                color: Colors.green,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ExpandedContainer(color: Colors.blue)));
-              },
-              child: Container(
-                height: 200,
-                color: Colors.blue,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ExpandedContainer(color: Colors.yellow)));
-              },
-              child: Container(
-                height: 200,
-                color: Colors.yellow,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ExpandedContainer(color: Colors.purple)));
-              },
-              child: Container(
-                height: 200,
-                color: Colors.purple,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ExpandedContainer(color: Colors.orange)));
-              },
-              child: Container(
-                height: 200,
-                color: Colors.orange,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ExpandedContainer(color: Colors.pink)));
-              },
-              child: Container(
-                height: 200,
-                color: Colors.pink,
-              ),
-            ),
+            // Rest of your page here
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class ExpandedContainer extends StatelessWidget {
-  final Color color;
-
-  ExpandedContainer({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        onTap: () => Navigator.pop(context),
-        child: Container(
-          color: color,
         ),
       ),
     );

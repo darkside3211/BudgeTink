@@ -8,6 +8,7 @@ import 'pages/analytics_screen.dart';
 import 'pages/records.screen.dart';
 import 'pages/budget_screen.dart';
 import 'pages/home_screen.dart';
+import 'package:animations/animations.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -49,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _selectedIndex = 0;
   int _page = 0;
+  final _pageController = PageController();
   GlobalKey _bottomNavigationKey = GlobalKey();
 
   final _pageOptions = [
@@ -57,12 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
     BudgetScreen(),
     RecordsScreen(),
   ];
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   Future<String> getUserName() async {
     User? user = _auth.currentUser;
@@ -162,9 +158,9 @@ class _MyHomePageState extends State<MyHomePage> {
           Icon(Icons.money, size: 30),
           Icon(Icons.format_list_bulleted, size: 30),
         ],
-        color: Colors.white,
+        color: Color.fromARGB(255, 12, 180, 49),
         buttonBackgroundColor: Colors.white,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.white12,
         animationCurve: Curves.easeInOut,
         animationDuration: Duration(milliseconds: 267),
         onTap: (index) {
@@ -173,7 +169,21 @@ class _MyHomePageState extends State<MyHomePage> {
           });
         },
       ),
-      body: _pageOptions[_page],
+      body: PageTransitionSwitcher(
+        transitionBuilder: (
+          Widget child,
+          Animation<double> animation,
+          Animation<double> secondaryAnimation,
+        ) {
+          return SharedAxisTransition(
+            child: child,
+            animation: animation,
+            secondaryAnimation: secondaryAnimation,
+            transitionType: SharedAxisTransitionType.horizontal,
+          );
+        },
+        child: _pageOptions[_page],
+      ),
     );
   }
 }

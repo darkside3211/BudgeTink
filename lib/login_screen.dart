@@ -51,11 +51,11 @@ class LoginScreen extends StatelessWidget {
                 } on FirebaseAuthException catch (e) {
                   if (e.code == 'user-not-found') {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('No user found for that email.')),
+                      const SnackBar(content: Text('No user found for that email.')),
                     );
                   } else if (e.code == 'wrong-password') {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                           content:
                               Text('Wrong password provided for that user.')),
                     );
@@ -65,11 +65,11 @@ class LoginScreen extends StatelessWidget {
               child: const Text('Login'),
             ),
             ElevatedButton(
-              child: Text('Create an account'),
+              child: const Text('Create an account'),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => RegisterPage()),
+                  MaterialPageRoute(builder: (context) => const RegisterPage()),
                 );
               },
             ),

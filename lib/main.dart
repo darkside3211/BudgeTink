@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'login_screen.dart' as login_screen;
+import 'pages/login_screen.dart' as login_screen;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'BudgeTink',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -68,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
-              icon: Icon(Icons.menu), // This is the burger menu icon
+              icon: const Icon(Icons.menu), // This is the burger menu icon
               onPressed: () {
                 Scaffold.of(context).openDrawer();
               },
@@ -78,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications), // This is the notification icon
+            icon: const Icon(Icons.notifications), // This is the notification icon
             onPressed: () {
               // Handle the notification button press here
             },
@@ -94,19 +95,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 future: getUserName(),
                 builder:
                     (BuildContext context, AsyncSnapshot<String> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting)
-                    return CircularProgressIndicator();
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  }
                   return Text(snapshot.data ?? 'No Username');
                 },
               ),
               accountEmail: Text(email ?? 'No Email'),
-              currentAccountPicture: CircleAvatar(
-                child: FlutterLogo(size: 42.0),
+              currentAccountPicture: const CircleAvatar(
                 backgroundColor: Colors.white,
+                child: FlutterLogo(size: 42.0),
               ),
             ),
             ListTile(
-              title: Text('Item 1'),
+              title: const Text('Item 1'),
               onTap: () {
                 // Update the state of the app
                 // Then close the drawer
@@ -118,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
               selected: _selectedIndex == 0, // Add this line
             ),
             ListTile(
-              title: Text('Item 2'),
+              title: const Text('Item 2'),
               onTap: () {
                 // Update the state of the app
                 // Then close the drawer
@@ -129,16 +131,16 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               selected: _selectedIndex == 1, // Add this line
             ),
-            AboutListTile(
+            const AboutListTile(
               // Add this line
               icon: Icon(Icons.info),
-              child: Text('About'),
               applicationName: 'App Name',
               applicationVersion: '1.0.0',
               applicationLegalese: '© 2022 Company Name',
               aboutBoxChildren: <Widget>[
                 Text('This is a demo application.'),
               ],
+              child: Text('About'),
             ),
           ],
         ),

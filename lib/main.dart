@@ -3,6 +3,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'pages/login_screen.dart' as login_screen;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'pages/analytics_screen.dart';
+import 'pages/records.screen.dart';
+import 'pages/budget_screen.dart';
+import 'pages/home_screen.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -42,7 +47,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  int _selectedIndex = 0; // Add this line
+  int _selectedIndex = 0;
+  int _page = 0;
+  GlobalKey _bottomNavigationKey = GlobalKey();
+
+  final _pageOptions = [
+    HomePage(),
+    AnalyticsScreen(),
+    RecordsScreen(),
+    BudgetScreen(),
+  ];
 
   void _incrementCounter() {
     setState(() {
@@ -69,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
-              icon: const Icon(Icons.menu), // This is the burger menu icon
+              icon: const Icon(Icons.menu),
               onPressed: () {
                 Scaffold.of(context).openDrawer();
               },
@@ -79,10 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.notifications), // This is the notification icon
-            onPressed: () {
-              // Handle the notification button press here
-            },
+            icon: const Icon(Icons.notifications),
+            onPressed: () {},
           ),
         ],
       ),
@@ -110,29 +122,24 @@ class _MyHomePageState extends State<MyHomePage> {
             ListTile(
               title: const Text('Item 1'),
               onTap: () {
-                // Update the state of the app
-                // Then close the drawer
                 setState(() {
                   _selectedIndex = 0;
                 });
                 Navigator.pop(context);
               },
-              selected: _selectedIndex == 0, // Add this line
+              selected: _selectedIndex == 0,
             ),
             ListTile(
               title: const Text('Item 2'),
               onTap: () {
-                // Update the state of the app
-                // Then close the drawer
                 setState(() {
                   _selectedIndex = 1;
                 });
                 Navigator.pop(context);
               },
-              selected: _selectedIndex == 1, // Add this line
+              selected: _selectedIndex == 1,
             ),
             const AboutListTile(
-              // Add this line
               icon: Icon(Icons.info),
               applicationName: 'App Name',
               applicationVersion: '1.0.0',
@@ -145,25 +152,28 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+      bottomNavigationBar: CurvedNavigationBar(
+        key: _bottomNavigationKey,
+        index: 0,
+        height: 50.0,
+        items: <Widget>[
+          Icon(Icons.home, size: 30),
+          Icon(Icons.add_chart, size: 30),
+          Icon(Icons.format_list_bulleted, size: 30),
+          Icon(Icons.money, size: 30),
+        ],
+        color: Colors.white,
+        buttonBackgroundColor: Colors.white,
+        backgroundColor: Colors.blueAccent,
+        animationCurve: Curves.easeInOut,
+        animationDuration: Duration(milliseconds: 267),
+        onTap: (index) {
+          setState(() {
+            _page = index;
+          });
+        },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      body: _pageOptions[_page],
     );
   }
 }

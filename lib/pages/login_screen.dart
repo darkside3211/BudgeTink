@@ -5,13 +5,18 @@ import 'register_user.dart';
 import 'package:gap/gap.dart';
 import 'package:animations/animations.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +58,7 @@ class LoginScreen extends StatelessWidget {
                       email: emailController.text,
                       password: passwordController.text,
                     );
+                    if (!mounted) return;
                     // Use PageRouteBuilder for custom transition
                     Navigator.push(
                       context,
@@ -70,11 +76,13 @@ class LoginScreen extends StatelessWidget {
                     );
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
+                      if (!mounted) return;
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                             content: Text('No user found for that email.')),
                       );
                     } else if (e.code == 'wrong-password') {
+                      if (!mounted) return;
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                             content:

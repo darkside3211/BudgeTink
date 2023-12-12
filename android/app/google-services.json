@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "507550665212",
-    "project_id": "budget-app-database-275f5",
-    "storage_bucket": "budget-app-database-275f5.appspot.com"
+    "project_number": "970989064398",
+    "project_id": "budgetink-bb4af",
+    "storage_bucket": "budgetink-bb4af.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:507550665212:android:3216b5d4fc97d391654a79",
+        "mobilesdk_app_id": "1:970989064398:android:00dceab4390d9ddcc1409f",
         "android_client_info": {
-          "package_name": "com.example.budget_app_prototype"
+          "package_name": "com.android.application"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB5eqouP30PE8C68Agkl6pLSr7518smhwk"
+          "current_key": "AIzaSyBZ2km7bFEYlAzEXv5F4lDIUEhsyi-awJY"
         }
       ],
       "services": {
@@ -26,7 +26,7 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:507550665212:android:2db66bfc375c54a1654a79",
+        "mobilesdk_app_id": "1:970989064398:android:91a97c242e28069cc1409f",
         "android_client_info": {
           "package_name": "com.example.budgetink"
         }
@@ -34,7 +34,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB5eqouP30PE8C68Agkl6pLSr7518smhwk"
+          "current_key": "AIzaSyBZ2km7bFEYlAzEXv5F4lDIUEhsyi-awJY"
         }
       ],
       "services": {

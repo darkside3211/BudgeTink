@@ -75,20 +75,25 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     );
                   } on FirebaseAuthException catch (e) {
-                    if (e.code == 'user-not-found') {
-                      if (!mounted) return;
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text('No user found for that email.')),
-                      );
-                    } else if (e.code == 'wrong-password') {
-                      if (!mounted) return;
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content:
-                                Text('Wrong password provided for that user.')),
-                      );
+                    String errorMessage;
+                    switch (e.code) {
+                      case 'invalid-email':
+                        errorMessage = "The email address is badly formatted.";
+                        break;
+                      case 'user-not-found':
+                        errorMessage = "No user found for that email.";
+                        break;
+                      case 'wrong-password':
+                        errorMessage = "Wrong password provided for that user.";
+                        break;
+                      default:
+                        errorMessage =
+                            "Something went wrong. Please try again later.";
                     }
+                    if (!mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(errorMessage)),
+                    );
                   }
                 },
                 child: const Text('Login'),

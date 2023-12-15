@@ -9,6 +9,7 @@ import 'pages/records.screen.dart';
 import 'pages/budget_screen.dart';
 import 'pages/home_screen.dart';
 import 'package:animations/animations.dart';
+import 'Button Functions/notifications.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -91,8 +92,37 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.notifications),
-            onPressed: () {},
-          ),
+            onPressed: () {
+              showGeneralDialog(
+                context: context,
+                barrierDismissible: true,
+                barrierLabel: "Notifications",
+                transitionBuilder: (context, a1, a2, widget) {
+                  final curvedValue =
+                      Curves.easeInOutBack.transform(a1.value) - 1.0;
+                  return Transform(
+                    transform:
+                        Matrix4.translationValues(0.0, curvedValue * 200, 0.0),
+                    child: Opacity(
+                      opacity: a1.value,
+                      child: Dialog(
+                        child: Container(
+                          height: 400, // Set the height of the dialog
+                          width: 300, // Set the width of the dialog
+                          child: Notifications(),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                transitionDuration: Duration(milliseconds: 400),
+                pageBuilder: (BuildContext context, Animation<double> animation,
+                    Animation<double> secondaryAnimation) {
+                  return Container();
+                },
+              );
+            },
+          )
         ],
       ),
       drawer: Drawer(
@@ -154,16 +184,16 @@ class _MyHomePageState extends State<MyHomePage> {
         index: 0,
         height: 50.0,
         items: <Widget>[
-          Icon(Icons.home, size: 30),
-          Icon(Icons.add_chart, size: 30),
-          Icon(Icons.money, size: 30),
-          Icon(Icons.format_list_bulleted, size: 30),
+          const Icon(Icons.home, size: 30),
+          const Icon(Icons.add_chart, size: 30),
+          const Icon(Icons.money, size: 30),
+          const Icon(Icons.format_list_bulleted, size: 30),
         ],
-        color: Color.fromARGB(255, 12, 180, 49),
+        color: const Color.fromARGB(255, 12, 180, 49),
         buttonBackgroundColor: Colors.white,
         backgroundColor: Colors.white12,
         animationCurve: Curves.easeInOut,
-        animationDuration: Duration(milliseconds: 267),
+        animationDuration: const Duration(milliseconds: 267),
         onTap: (index) {
           setState(() {
             _page = index;

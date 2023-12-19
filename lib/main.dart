@@ -19,6 +19,13 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
+Map<DateTime, int> data = {};
+void updateData(double income) {
+  DateTime today = DateTime.now();
+  data[today] = income.toInt();
+  print('Data updated: $data');
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

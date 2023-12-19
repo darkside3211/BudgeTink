@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
+import 'package:budgetink/main.dart';
 
 class HeatmapCalendarWidget extends StatefulWidget {
   @override
@@ -9,6 +10,12 @@ class HeatmapCalendarWidget extends StatefulWidget {
 class _HeatmapCalendarWidgetState extends State<HeatmapCalendarWidget> {
   DateTime displayedMonth = DateTime.now();
   Map<DateTime, int> data = {};
+
+  void updateData(double income) {
+    DateTime today = DateTime.now();
+    data[today] = income.toInt();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {

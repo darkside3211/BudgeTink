@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:budgetink/main.dart';
 
 class BudgetScreen extends StatefulWidget {
   const BudgetScreen({super.key});
@@ -72,6 +73,12 @@ class _BudgetScreenState extends State<BudgetScreen> {
               },
               keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: 'Expenses'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                updateData(income);
+              },
+              child: Text('Update Heatmap'),
             ),
             Text('Savings: ${savings.toStringAsFixed(2)}'),
           ],

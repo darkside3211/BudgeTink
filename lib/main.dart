@@ -10,6 +10,7 @@ import 'pages/budget_screen.dart';
 import 'pages/home_screen.dart';
 import 'package:animations/animations.dart';
 import 'Button Functions/notifications.dart';
+import 'pages/userProfile_screen.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -149,9 +150,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               accountEmail: Text(email ?? 'No Email'),
-              currentAccountPicture: const CircleAvatar(
-                backgroundColor: Colors.white,
-                child: FlutterLogo(size: 42.0),
+              currentAccountPicture: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context); // Close the drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => UserProfileScreen()),
+                  );
+                },
+                child: const CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: FlutterLogo(size: 42.0),
+                ),
               ),
             ),
             ListTile(

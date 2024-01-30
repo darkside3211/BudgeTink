@@ -22,7 +22,14 @@ class Notifications extends StatefulWidget {
 }
 
 class _NotificationsState extends State<Notifications> {
-  final List<NotificationModel> _notifications = getNotifications();
+  late List<NotificationModel> _notifications;
+  late List<bool> _isExpanded = List<bool>.filled(_notifications.length, false);
+
+  @override
+  void initState() {
+    super.initState();
+    _notifications = getNotifications();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,21 +38,42 @@ class _NotificationsState extends State<Notifications> {
         child: ExpansionPanelList(
           expansionCallback: (int index, bool isExpanded) {
             setState(() {
-              _notifications[index].isExpanded = !isExpanded;
+              _isExpanded[index] = !isExpanded;
             });
           },
-          children:
-              _notifications.map<ExpansionPanel>((NotificationModel note) {
+          children: _notifications.asMap().entries.map((entry) {
+            final int index = entry.key;
+            final NotificationModel note = entry.value;
             return ExpansionPanel(
               headerBuilder: (BuildContext context, bool isExpanded) {
                 return ListTile(
                   title: Text(note.title),
                 );
               },
-              body: ListTile(
-                title: Text(note.content),
-              ),
-              isExpanded: note.isExpanded,
+              body: note.title == 'Notification 1'
+                  ? Column(
+                      children: [
+                        ListTile(
+                          title: Text('Placeholder Content for Notification 1'),
+                        ),
+                        ListTile(
+                          title: Text(
+                              'More Placeholder Content for Notification 1'),
+                        ),
+                        ListTile(
+                          title: Text(
+                              'Even More Placeholder Content for Notification 1'),
+                        ),
+                        ListTile(
+                          title: Text(
+                              'And Finally, Some More Placeholder Content for Notification 1'),
+                        ),
+                      ],
+                    )
+                  : ListTile(
+                      title: Text(note.content),
+                    ),
+              isExpanded: _isExpanded[index],
             );
           }).toList(),
         ),

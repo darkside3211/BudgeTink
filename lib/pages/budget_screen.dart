@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:budgetink/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class BudgetScreen extends StatefulWidget {
   const BudgetScreen({super.key});
@@ -51,6 +55,26 @@ class _BudgetScreenState extends State<BudgetScreen> {
     });
   }
 
+  Future<void> saveSavings() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      DateTime now = DateTime.now();
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .collection('savings')
+          .doc(now.toIso8601String())
+          .set({
+        'amount': savings,
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Your savings have been saved!')),
+      );
+    } else {
+      print('No user is signed in');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,13 +98,13 @@ class _BudgetScreenState extends State<BudgetScreen> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: 'Expenses'),
             ),
+            Text('Savings: ${savings.toStringAsFixed(2)}'),
             ElevatedButton(
               onPressed: () {
-                updateData(income);
+                saveSavings();
               },
-              child: Text('Update Heatmap'),
+              child: Text('Save Savings'),
             ),
-            Text('Savings: ${savings.toStringAsFixed(2)}'),
           ],
         ),
       ),

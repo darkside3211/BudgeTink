@@ -75,6 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     );
                   } on FirebaseAuthException catch (e) {
+                    print('Error code: ${e.code}, Error message: ${e.message}');
                     String errorMessage;
                     switch (e.code) {
                       case 'invalid-email':
@@ -88,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         break;
                       default:
                         errorMessage =
-                            "Something went wrong. Please try again later.";
+                            "Error code: ${e.code}. Something went wrong. Please try again later.";
                     }
                     if (!mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(

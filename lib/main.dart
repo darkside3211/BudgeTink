@@ -56,6 +56,30 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+class NotificationItem extends StatefulWidget {
+  final String title;
+
+  const NotificationItem({Key? key, required this.title}) : super(key: key);
+
+  @override
+  _NotificationItemState createState() => _NotificationItemState();
+}
+
+class _NotificationItemState extends State<NotificationItem> {
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      title: Text(widget.title),
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text('More information about the notification goes here...'),
+        ),
+      ],
+    );
+  }
+}
+
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _selectedIndex = 0;
@@ -76,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
         .collection('users')
         .doc(user?.uid)
         .get();
-    return ds['username'];
+    return ds.exists ? ds['username'] ?? 'No Username' : 'No Username';
   }
 
 //test comment
@@ -118,7 +142,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Container(
                           height: 400, // Set the height of the dialog
                           width: 300, // Set the width of the dialog
-                          child: Notifications(),
+                          child: ListView(
+                            children: <Widget>[
+                              NotificationItem(title: 'Notification 1'),
+                              NotificationItem(title: 'Notification 2'),
+                              NotificationItem(title: 'Notification 3'),
+                              // Add more NotificationItems as needed
+                            ],
+                          ),
                         ),
                       ),
                     ),
